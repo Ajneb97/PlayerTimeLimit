@@ -1,0 +1,10 @@
+main: ptl.ajneb97.PlayerTimeLimit
+version: 1.1.1
+name: PlayerTimeLimit
+api-version: 1.13
+author: Ajneb97
+
+commands:
+  playertimelimit:
+    description: Main command of PlayerTimeLimit
+    aliases: [ptl]

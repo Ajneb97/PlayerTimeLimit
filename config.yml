@@ -1,0 +1,13 @@
+update_notification: true
+time_limits:
+  default: 3600
+  vip: 7200
+  op: 0
+reset_time: "00:00"
+information_message_enabled_by_default: true
+data_save_time: 5
+action_bar: false
+boss_bar:
+    enabled: true
+    color: RED
+    style: SEGMENTED_10
