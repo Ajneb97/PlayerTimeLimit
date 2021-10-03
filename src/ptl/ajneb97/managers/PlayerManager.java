@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.core.config.plugins.Plugin;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import ptl.ajneb97.PlayerTimeLimit;
+import ptl.ajneb97.configs.MainConfigManager;
 import ptl.ajneb97.configs.others.TimeLimit;
 import ptl.ajneb97.model.TimeLimitPlayer;
 import ptl.ajneb97.utils.UtilsTime;
@@ -70,6 +75,12 @@ public class PlayerManager {
 		new BukkitRunnable() {
 			@Override
 			public void run() {
+				MainConfigManager mainConfig = plugin.getConfigsManager().getMainConfigManager();
+				if(mainConfig.isWorldWhitelistEnabled()) {
+					worldWhitelistSystemKick(player);
+					return;
+				}
+				
 				List<String> msg = messages.getStringList("kickMessage");
 				String finalMessage = "";
 				for(String line : msg) {
@@ -123,5 +134,30 @@ public class PlayerManager {
 			timeString = UtilsTime.getTime(remainingTime,msgManager);
 		}
 		return timeString;
+	}
+	
+	public void worldWhitelistSystemKick(Player player) {
+		MainConfigManager mainConfig = plugin.getConfigsManager().getMainConfigManager();
+		String coordinates = mainConfig.getWorldWhitelistTeleportCoordinates();
+		try {
+			String[] sep = coordinates.split(";");
+			World world = Bukkit.getWorld(sep[0]);
+			double x = Double.valueOf(sep[1]);
+			double y = Double.valueOf(sep[2]);
+			double z = Double.valueOf(sep[3]);
+			float yaw = Float.valueOf(sep[4]);
+			float pitch = Float.valueOf(sep[5]);
+			
+			player.teleport(new Location(world,x,y,z,yaw,pitch));
+			
+			FileConfiguration messages = plugin.getMessages();
+			List<String> msg = messages.getStringList("kickMessage");
+			for(String m : msg) {
+				player.sendMessage(MensajesManager.getMensajeColor(m));
+			}
+		}catch(Exception e) {
+			player.sendMessage(plugin.nombrePlugin+" &cError! Impossible to teleport &7"+player.getName()
+			+" &cto this coordinates: &7"+coordinates);
+		}
 	}
 }

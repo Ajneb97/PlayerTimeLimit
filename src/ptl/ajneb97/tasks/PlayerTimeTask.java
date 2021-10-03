@@ -3,6 +3,7 @@ package ptl.ajneb97.tasks;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
@@ -16,6 +17,7 @@ import ptl.ajneb97.libs.actionbar.ActionBarAPI;
 import ptl.ajneb97.libs.bossbar.BossBarAPI;
 import ptl.ajneb97.managers.MensajesManager;
 import ptl.ajneb97.managers.PlayerManager;
+import ptl.ajneb97.managers.ServerManager;
 import ptl.ajneb97.model.TimeLimitPlayer;
 import ptl.ajneb97.utils.UtilsTime;
 
@@ -48,10 +50,15 @@ public class PlayerTimeTask {
 				String bossBarStyle = mainConfig.getBossBarStyle();
 				
 				PlayerManager playerManager = plugin.getPlayerManager();
+				ServerManager serverManager = plugin.getServerManager();
 				for(TimeLimitPlayer p : playerManager.getPlayers()) {
 					Player player = p.getPlayer();
 					if(player != null) {
 						//Esta conectado
+						World world = player.getWorld();
+						if(!serverManager.isValidWorld(world)) {
+							continue;
+						}
 						p.increaseTime();
 						sendActionBar(player,p,actionBar);
 						sendBossBar(player,p,bossBar,bossBarColor,bossBarStyle);

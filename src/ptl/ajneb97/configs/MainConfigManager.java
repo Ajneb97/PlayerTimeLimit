@@ -2,6 +2,7 @@ package ptl.ajneb97.configs;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -18,6 +19,9 @@ public class MainConfigManager {
 	private String bossBarColor;
 	private String bossBarStyle;
 	private String resetTime;
+	private boolean worldWhitelistEnabled;
+	private List<String> worldWhitelistWorlds;
+	private String worldWhitelistTeleportCoordinates;
 	
 	public MainConfigManager(PlayerTimeLimit plugin) {
 		this.plugin = plugin;
@@ -36,6 +40,9 @@ public class MainConfigManager {
 		bossBarColor = config.getString("boss_bar.color");
 		bossBarStyle = config.getString("boss_bar.style");
 		resetTime = config.getString("reset_time");
+		worldWhitelistEnabled = config.getBoolean("world_whitelist_system.enabled");
+		worldWhitelistWorlds = config.getStringList("world_whitelist_system.worlds");
+		worldWhitelistTeleportCoordinates = config.getString("world_whitelist_system.teleport_coordinates_on_kick");
 	}
 
 	public boolean isActionBar() {
@@ -55,6 +62,15 @@ public class MainConfigManager {
 	}
 	public ArrayList<TimeLimit> getTimeLimits() {
 		return timeLimits;
+	}
+	public boolean isWorldWhitelistEnabled() {
+		return worldWhitelistEnabled;
+	}
+	public List<String> getWorldWhitelistWorlds() {
+		return worldWhitelistWorlds;
+	}
+	public String getWorldWhitelistTeleportCoordinates() {
+		return worldWhitelistTeleportCoordinates;
 	}
 
 }

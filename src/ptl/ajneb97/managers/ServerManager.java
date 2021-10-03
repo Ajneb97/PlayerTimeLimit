@@ -5,11 +5,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import ptl.ajneb97.PlayerTimeLimit;
+import ptl.ajneb97.configs.MainConfigManager;
 import ptl.ajneb97.model.TimeLimitPlayer;
 import ptl.ajneb97.utils.UtilsTime;
 
@@ -52,5 +55,21 @@ public class ServerManager {
 		long remainingMillis = finalMillis-System.currentTimeMillis();
 		long segundos = remainingMillis/1000;
 		return UtilsTime.getTime(segundos, plugin.getMensajesManager());
+	}
+	
+	public boolean isValidWorld(World world) {
+		MainConfigManager mainConfig = plugin.getConfigsManager().getMainConfigManager();
+		if(!mainConfig.isWorldWhitelistEnabled()) {
+			return true;
+		}
+		
+		List<String> worlds = mainConfig.getWorldWhitelistWorlds();
+		for(String w : worlds) {
+			if(w.equals(world.getName())) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }

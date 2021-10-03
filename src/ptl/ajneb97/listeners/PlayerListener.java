@@ -3,6 +3,7 @@ package ptl.ajneb97.listeners;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -13,6 +14,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import ptl.ajneb97.PlayerTimeLimit;
 import ptl.ajneb97.configs.others.TimeLimit;
@@ -34,6 +37,12 @@ public class PlayerListener implements Listener{
 		PlayerManager playerManager = plugin.getPlayerManager();
 		TimeLimitPlayer p = playerManager.getPlayerByUUID(uuid);
 		if(p != null) {
+			//Si entra al server y esta activada la world whitelist no se le
+			//expulsa al intentar entrar al server
+			if(plugin.getConfigsManager().getMainConfigManager().isWorldWhitelistEnabled()) {
+				return;
+			}
+			
 			int currentTime = p.getCurrentTime();
 			int timeLimit = playerManager.getTimeLimitPlayer(player);
 			if(currentTime >= timeLimit && timeLimit != 0) {
@@ -81,5 +90,11 @@ public class PlayerListener implements Listener{
 			p.setPlayer(null);
 			p.eliminarBossBar();
 		}
+	}
+	
+	@EventHandler
+	public void onTeleport(PlayerTeleportEvent event) {
+		TeleportCause cause = event.getCause();
+		
 	}
 }
