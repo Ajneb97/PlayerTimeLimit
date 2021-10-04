@@ -64,10 +64,8 @@ public class ServerManager {
 		}
 		
 		List<String> worlds = mainConfig.getWorldWhitelistWorlds();
-		for(String w : worlds) {
-			if(w.equals(world.getName())) {
-				return true;
-			}
+		if(worlds.contains(world.getName())) {
+			return true;
 		}
 		
 		return false;

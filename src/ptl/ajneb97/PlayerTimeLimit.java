@@ -146,6 +146,14 @@ public class PlayerTimeLimit extends JavaPlugin {
 			  String textoMessages = new String(Files.readAllBytes(archivoMessages));
 			  FileConfiguration messages = configsManager.getMensajesConfigManager().getMessages();
 			  
+			  if(!textoConfig.contains("world_whitelist_system:")){
+				  getConfig().set("world_whitelist_system.enabled", false);
+				  List<String> lista = new ArrayList<String>();
+				  lista.add("world");lista.add("world_nether");lista.add("world_the_end");
+				  getConfig().set("world_whitelist_system.worlds", lista);
+				  getConfig().set("world_whitelist_system.teleport_coordinates_on_kick", "spawn;0;60;0;90;0");
+				  saveConfig();
+			  }
 			  if(!textoConfig.contains("update_notification:")){
 				  getConfig().set("update_notification", true);
 				  saveConfig();

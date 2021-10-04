@@ -57,6 +57,7 @@ public class PlayerTimeTask {
 						//Esta conectado
 						World world = player.getWorld();
 						if(!serverManager.isValidWorld(world)) {
+							p.eliminarBossBar();
 							continue;
 						}
 						p.increaseTime();

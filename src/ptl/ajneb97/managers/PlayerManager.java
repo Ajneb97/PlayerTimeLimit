@@ -64,9 +64,7 @@ public class PlayerManager {
 	}
 	
 	public void checkUserTime(final Player player,TimeLimitPlayer p) {
-		int currentTime = p.getCurrentTime();
-		int timeLimit = getTimeLimitPlayer(player);
-		if(currentTime < timeLimit || timeLimit == 0) {
+		if(hasTimeLeft(p)) {
 			return;
 		}
 		
@@ -96,6 +94,15 @@ public class PlayerManager {
 		for(TimeLimitPlayer p : players) {
 			p.setCurrentTime(0);
 		}
+	}
+	
+	public boolean hasTimeLeft(TimeLimitPlayer p) {
+		int currentTime = p.getCurrentTime();
+		int timeLimit = getTimeLimitPlayer(p.getPlayer());
+		if(currentTime < timeLimit || timeLimit == 0) {
+			return true;
+		}
+		return false;
 	}
 	
 	public int getTimeLimitPlayer(Player player) {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,6 +19,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import ptl.ajneb97.PlayerTimeLimit;
+import ptl.ajneb97.configs.MainConfigManager;
 import ptl.ajneb97.configs.others.TimeLimit;
 import ptl.ajneb97.managers.MensajesManager;
 import ptl.ajneb97.managers.PlayerManager;
@@ -92,9 +94,39 @@ public class PlayerListener implements Listener{
 		}
 	}
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onTeleport(PlayerTeleportEvent event) {
 		TeleportCause cause = event.getCause();
-		
+		if(cause.equals(TeleportCause.PLUGIN) || cause.equals(TeleportCause.COMMAND)) {
+			Player player = event.getPlayer();
+			PlayerManager playerManager = plugin.getPlayerManager();
+			TimeLimitPlayer p = playerManager.getPlayerByUUID(player.getUniqueId().toString());
+			if(p == null) {
+				return;
+			}
+			
+			MainConfigManager mainConfig = plugin.getConfigsManager().getMainConfigManager();
+			if(!mainConfig.isWorldWhitelistEnabled()) {
+				return;
+			}
+			
+			//Revisar si el mundo donde va esta activado
+			World worldTo = event.getTo().getWorld();
+			List<String> worlds = mainConfig.getWorldWhitelistWorlds();
+			if(!worlds.contains(worldTo.getName())) {
+				return;
+			}
+			
+			//Revisar si se le ha acabado el tiempo
+			if(!playerManager.hasTimeLeft(p)) {
+				FileConfiguration messages = plugin.getMessages();
+				List<String> msg = messages.getStringList("joinErrorMessage");
+				for(String m : msg) {
+					player.sendMessage(MensajesManager.getMensajeColor(m));
+				}
+				event.setCancelled(true);
+				return;
+			}
+		}
 	}
 }
