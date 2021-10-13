@@ -4,7 +4,6 @@ name: PlayerTimeLimit
 api-version: 1.13
 author: Ajneb97
 softdepend: [Multiverse-Core]
-
 commands:
   playertimelimit:
     description: Main command of PlayerTimeLimit
