@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -29,8 +28,6 @@ import ptl.ajneb97.managers.ServerManager;
 import ptl.ajneb97.tasks.DataSaveTask;
 import ptl.ajneb97.tasks.PlayerTimeTask;
 import ptl.ajneb97.tasks.ServerTimeResetTask;
-
-
 
 public class PlayerTimeLimit extends JavaPlugin {
   
@@ -49,13 +46,13 @@ public class PlayerTimeLimit extends JavaPlugin {
 	
 	public static String nombrePlugin = ChatColor.translateAlternateColorCodes('&', "&8[&bPlayerTime&cLimit&8] ");
 	
-	public void onEnable(){
+	public void onEnable() {
+	   this.configsManager = new ConfigsManager(this);
 	   this.playerManager = new PlayerManager(this);
 	   this.serverManager = new ServerManager(this);
 	   registerEvents();
 	   registerCommands();
 	   registerConfig();
-	   this.configsManager = new ConfigsManager(this);
 	   this.configsManager.configurar();
 	   
 	   serverManager.executeDataTime();
