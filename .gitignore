@@ -38,3 +38,8 @@ local.properties
 .recommenders
 
 .players/
+
+# Intellij Idea
+/.idea/
+*.iml
+/out/
