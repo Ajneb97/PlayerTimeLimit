@@ -1,9 +1,9 @@
 main: ptl.ajneb97.PlayerTimeLimit
-version: 1.2.1
+version: 1.2.2
 name: PlayerTimeLimit
 api-version: 1.13
 author: Ajneb97
-softdepend: [Multiverse-Core]
+softdepend: [Multiverse-Core,PlaceholderAPI]
 
 commands:
   playertimelimit:

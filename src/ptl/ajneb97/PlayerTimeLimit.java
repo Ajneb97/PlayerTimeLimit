@@ -21,6 +21,8 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ptl.ajneb97.api.ExpansionPlayerTimeLimit;
+import ptl.ajneb97.api.PlayerTimeLimitAPI;
 import ptl.ajneb97.configs.ConfigsManager;
 import ptl.ajneb97.listeners.PlayerListener;
 import ptl.ajneb97.managers.MensajesManager;
@@ -67,6 +69,11 @@ public class PlayerTimeLimit extends JavaPlugin {
 	   
 	   recargarDataSaveTask();
 	   checkMessagesUpdate();
+	   
+	   PlayerTimeLimitAPI api = new PlayerTimeLimitAPI(this);
+	   if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
+		   new ExpansionPlayerTimeLimit(this).register();
+	   }
 	   
 	   Bukkit.getConsoleSender().sendMessage(nombrePlugin+ChatColor.YELLOW + "Has been enabled! " + ChatColor.WHITE + "Version: " + version);
 	   Bukkit.getConsoleSender().sendMessage(nombrePlugin+ChatColor.YELLOW + "Thanks for using my plugin!  " + ChatColor.WHITE + "~Ajneb97");
