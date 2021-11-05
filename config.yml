@@ -18,3 +18,16 @@ boss_bar:
   enabled: true
   color: RED
   style: SEGMENTED_10
+notification:
+  60:
+    message:
+    - ""
+    - "{centered}&c&lWARNING!"
+    - "{centered}&cYou have &71 minute &cleft to play on the server."
+    - ""
+  30:
+    message:
+    - ""
+    - "{centered}&c&lWARNING!"
+    - "{centered}&cYou have &730 seconds &cleft to play on the server."
+    - ""

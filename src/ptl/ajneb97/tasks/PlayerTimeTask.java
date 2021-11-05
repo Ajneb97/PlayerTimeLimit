@@ -1,6 +1,7 @@
 package ptl.ajneb97.tasks;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -12,6 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import ptl.ajneb97.PlayerTimeLimit;
 import ptl.ajneb97.configs.MainConfigManager;
+import ptl.ajneb97.configs.others.Notification;
 import ptl.ajneb97.configs.others.TimeLimit;
 import ptl.ajneb97.libs.actionbar.ActionBarAPI;
 import ptl.ajneb97.libs.bossbar.BossBarAPI;
@@ -63,11 +65,30 @@ public class PlayerTimeTask {
 						p.increaseTime();
 						sendActionBar(player,p,actionBar);
 						sendBossBar(player,p,bossBar,bossBarColor,bossBarStyle);
+						sendNotification(player,p,mainConfig);
 						playerManager.checkUserTime(player, p);
 					}
 				}
 			}
 		}.runTaskAsynchronously(plugin);
+	}
+	
+	public void sendNotification(Player player,TimeLimitPlayer p,MainConfigManager mainConfig) {
+		PlayerManager playerManager = plugin.getPlayerManager();
+		int timeLimit = playerManager.getTimeLimitPlayer(player);
+		int remainingTime = timeLimit-p.getCurrentTime();
+		
+		Notification notification = mainConfig.getNotificationAtTime(remainingTime);
+		if(notification == null) {
+			return;
+		}
+		
+		List<String> message = notification.getMessage();
+		if(message != null) {
+			for(String line : message) {
+				player.sendMessage(MensajesManager.getMensajeColor(line));
+			}
+		}
 	}
 	
 	public void sendActionBar(Player player,TimeLimitPlayer p,boolean enabled) {
