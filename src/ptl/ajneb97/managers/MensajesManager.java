@@ -91,7 +91,7 @@ public class MensajesManager {
 	}
 	
 	public static String getMensajeColor(String texto) {
-		if(Bukkit.getVersion().contains("1.16") || Bukkit.getVersion().contains("1.17") ) {
+		if(Bukkit.getVersion().contains("1.16") || Bukkit.getVersion().contains("1.17") || Bukkit.getVersion().contains("1.18") ) {
 			Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
 			Matcher match = pattern.matcher(texto);
 			
