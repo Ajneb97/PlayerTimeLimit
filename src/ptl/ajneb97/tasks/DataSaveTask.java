@@ -21,7 +21,6 @@ public class DataSaveTask {
 		long ticks = minutes*60*20;
 		
 		new BukkitRunnable() {
-			@Override
 			public void run() {
 				if(end) {
 					this.cancel();

@@ -1,9 +1,7 @@
 package ptl.ajneb97.listeners;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -20,10 +18,10 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import ptl.ajneb97.PlayerTimeLimit;
 import ptl.ajneb97.configs.MainConfigManager;
-import ptl.ajneb97.configs.others.TimeLimit;
 import ptl.ajneb97.managers.MensajesManager;
 import ptl.ajneb97.managers.PlayerManager;
 import ptl.ajneb97.model.TimeLimitPlayer;
+import ptl.ajneb97.utils.BypassTimes;
 
 public class PlayerListener implements Listener{
 
@@ -47,7 +45,7 @@ public class PlayerListener implements Listener{
 			
 			int currentTime = p.getCurrentTime();
 			int timeLimit = playerManager.getTimeLimitPlayer(player);
-			if(currentTime >= timeLimit && timeLimit != 0) {
+			if(currentTime >= timeLimit && timeLimit != 0 && !BypassTimes.isBypassNow(plugin)) {
 				FileConfiguration messages = plugin.getMessages();
 				List<String> msg = messages.getStringList("joinErrorMessage");
 				String finalMessage = "";

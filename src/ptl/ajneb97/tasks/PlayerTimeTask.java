@@ -1,6 +1,9 @@
 package ptl.ajneb97.tasks;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -14,14 +17,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 import ptl.ajneb97.PlayerTimeLimit;
 import ptl.ajneb97.configs.MainConfigManager;
 import ptl.ajneb97.configs.others.Notification;
-import ptl.ajneb97.configs.others.TimeLimit;
 import ptl.ajneb97.libs.actionbar.ActionBarAPI;
 import ptl.ajneb97.libs.bossbar.BossBarAPI;
 import ptl.ajneb97.managers.MensajesManager;
 import ptl.ajneb97.managers.PlayerManager;
 import ptl.ajneb97.managers.ServerManager;
 import ptl.ajneb97.model.TimeLimitPlayer;
-import ptl.ajneb97.utils.UtilsTime;
+import ptl.ajneb97.utils.BypassTimes;
 
 public class PlayerTimeTask {
 
@@ -32,7 +34,6 @@ public class PlayerTimeTask {
 	
 	public void start() {
 		new BukkitRunnable() {
-			@Override
 			public void run() {
 				execute();
 			}
@@ -42,7 +43,6 @@ public class PlayerTimeTask {
 	
 	public void execute() {
 		new BukkitRunnable() {
-			@Override
 			public void run() {
 				MainConfigManager mainConfig = plugin.getConfigsManager().getMainConfigManager();
 
@@ -62,7 +62,10 @@ public class PlayerTimeTask {
 							p.eliminarBossBar();
 							continue;
 						}
-						p.increaseTime();
+
+						if(!BypassTimes.isBypassNow(plugin))
+							p.increaseTime();
+						
 						sendActionBar(player,p,actionBar);
 						sendBossBar(player,p,bossBar,bossBarColor,bossBarStyle);
 						sendNotification(player,p,mainConfig);
