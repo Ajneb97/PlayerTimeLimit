@@ -167,4 +167,24 @@ public class PlayerManager {
 			+" &cto this coordinates: &7"+coordinates);
 		}
 	}
+	
+	public void takeTime(TimeLimitPlayer p,int time) {
+		int timeLimit = getTimeLimitPlayer(p.getPlayer());
+		if(timeLimit == 0) {
+			return;
+		}
+		p.takeTime(time);
+		int remainingTime = timeLimit-p.getCurrentTime();
+		if(remainingTime <= 0) {
+			p.setCurrentTime(timeLimit);
+		}
+	}
+	
+	public void addTime(TimeLimitPlayer p,int time) {
+		int timeLimit = getTimeLimitPlayer(p.getPlayer());
+		if(timeLimit == 0) {
+			return;
+		}
+		p.addTime(time);
+	}
 }

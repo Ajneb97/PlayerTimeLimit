@@ -148,6 +148,8 @@ public class PlayerTimeTask {
 		}
 		if(ratio < 0) {
 			ratio = 0;
+		}else if(ratio > 1) {
+			ratio = 1;
 		}
 		bossBar.setProgress(ratio);
 	}

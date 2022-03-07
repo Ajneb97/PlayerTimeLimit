@@ -153,6 +153,17 @@ public class PlayerTimeLimit extends JavaPlugin {
 			  String textoMessages = new String(Files.readAllBytes(archivoMessages));
 			  FileConfiguration messages = configsManager.getMensajesConfigManager().getMessages();
 			  
+			  if(!textoMessages.contains("commandResetTimeError:")){
+				  messages.set("commandResetTimeError", "&cYou need to use: &7/ptl resettime <player>");
+				  messages.set("commandResetTimeCorrect", "&aCurrent time has been reset for player &7%player%&a!");
+				  messages.set("commandTakeTimeError", "&cYou need to use: &7/ptl taketime <player> <time>");
+				  messages.set("invalidNumber", "&cYou need to use a valid number!");
+				  messages.set("commandTakeTimeCorrect", "&aTaken &7%time% seconds &afrom &7%player% &atime!");
+				  messages.set("playerNotOnline", "&cThat player is not online.");
+				  messages.set("commandAddTimeError", "&cYou need to use: &7/ptl addtime <player> <time>");
+				  messages.set("commandAddTimeCorrect", "&aAdded &7%time% seconds &ato &7%player% &atime!");
+				  configsManager.getMensajesConfigManager().saveMessages();
+			  }
 			  if(!textoConfig.contains("world_whitelist_system:")){
 				  getConfig().set("world_whitelist_system.enabled", false);
 				  List<String> lista = new ArrayList<String>();

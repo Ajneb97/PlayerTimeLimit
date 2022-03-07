@@ -76,4 +76,16 @@ public class TimeLimitPlayer {
 			bossBar = null;
 		}
 	}
+	
+	public void resetTime() {
+		this.setCurrentTime(0);
+	}
+	
+	public void takeTime(int time) {
+		currentTime = currentTime+time;
+	}
+	
+	public void addTime(int time) {
+		currentTime = currentTime-time;
+	}
 }
