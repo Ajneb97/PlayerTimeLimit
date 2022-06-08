@@ -17,7 +17,8 @@ public class ActionBarAPI
 
 	@SuppressWarnings("deprecation")
 	public static void sendActionBar(Player player, String message){
-		if(Bukkit.getVersion().contains("1.16") || Bukkit.getVersion().contains("1.17") || Bukkit.getVersion().contains("1.18")) {
+		if(Bukkit.getVersion().contains("1.16") || Bukkit.getVersion().contains("1.17") || Bukkit.getVersion().contains("1.18")
+				|| Bukkit.getVersion().contains("1.19")) {
 			player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(MensajesManager.getMensajeColor(message)));
 			return;
 		}
