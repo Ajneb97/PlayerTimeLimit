@@ -2,14 +2,11 @@ package ptl.ajneb97.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
-import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import ptl.ajneb97.PlayerTimeLimit;
 import ptl.ajneb97.configs.MainConfigManager;
-import ptl.ajneb97.model.TimeLimitPlayer;
 
 public class ServerTimeResetTask {
 
@@ -22,7 +19,6 @@ public class ServerTimeResetTask {
 	
 	public void start() {
 		new BukkitRunnable() {
-			@Override
 			public void run() {
 				execute();
 			}
@@ -39,7 +35,6 @@ public class ServerTimeResetTask {
 		if(resetTime.equals(currentTime)) {
 			//REINICIO DE TIEMPO
 			new BukkitRunnable() {
-				@Override
 				public void run() {
 					plugin.getPlayerManager().resetPlayers();
 				}

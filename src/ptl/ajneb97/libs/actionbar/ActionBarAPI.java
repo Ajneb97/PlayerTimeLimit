@@ -2,6 +2,7 @@ package ptl.ajneb97.libs.actionbar;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -88,7 +89,6 @@ public class ActionBarAPI
 		if (duration >= 0) {
 			// Sends empty message at the end of the duration. Allows messages shorter than 3 seconds, ensures precision.
 			new BukkitRunnable() {
-				@Override
 				public void run() {
 					sendActionBar(player, "");
 				}
@@ -99,7 +99,6 @@ public class ActionBarAPI
 		while (duration > 40) {
 			duration -= 40;
 			new BukkitRunnable() {
-				@Override
 				public void run() {
 					sendActionBar(player, message);
 				}

@@ -10,6 +10,7 @@ import ptl.ajneb97.utils.UtilsTime;
 public class PlayerTimeLimitAPI {
 
 	private static PlayerTimeLimit plugin;
+	@SuppressWarnings("static-access")
 	public PlayerTimeLimitAPI(PlayerTimeLimit plugin) {
 		this.plugin = plugin;
 	}

@@ -3,9 +3,7 @@ package ptl.ajneb97.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -16,6 +14,7 @@ import ptl.ajneb97.PlayerTimeLimit;
 import ptl.ajneb97.configs.MainConfigManager;
 import ptl.ajneb97.configs.others.TimeLimit;
 import ptl.ajneb97.model.TimeLimitPlayer;
+import ptl.ajneb97.utils.BypassTimes;
 import ptl.ajneb97.utils.UtilsTime;
 
 public class PlayerManager {
@@ -71,7 +70,6 @@ public class PlayerManager {
 		//El jugador ya ha completado su tiempo
 		final FileConfiguration messages = plugin.getMessages();
 		new BukkitRunnable() {
-			@Override
 			public void run() {
 				MainConfigManager mainConfig = plugin.getConfigsManager().getMainConfigManager();
 				if(mainConfig.isWorldWhitelistEnabled()) {
@@ -99,7 +97,7 @@ public class PlayerManager {
 	public boolean hasTimeLeft(TimeLimitPlayer p) {
 		int currentTime = p.getCurrentTime();
 		int timeLimit = getTimeLimitPlayer(p.getPlayer());
-		if(currentTime < timeLimit || timeLimit == 0) {
+		if(currentTime < timeLimit || timeLimit == 0 || BypassTimes.isBypassNow(plugin)) {
 			return true;
 		}
 		return false;
