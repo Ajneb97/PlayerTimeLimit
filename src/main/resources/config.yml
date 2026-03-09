@@ -1,0 +1,98 @@
+# Whether the plugin should alert OP players of new plugin updates
+# when joining the server.
+update_notification: true
+
+# Here you must define the amount of time (in seconds) a
+# user can play on the server until play times are reset. You can
+# create as many groups as necessary, and give the following permission
+# to the players to apply a group: playertimelimit.limit.<group>
+# Default and op groups don't require permissions to be used.
+# Set time to 0 for no time limit.
+time_limits:
+  default: 3600
+  op: 0
+  vip: 7200
+
+# Configuration to set when should the play time be reset.
+time_reset:
+  # The mode of play time reset
+  # DAILY: Play times are reset each day.
+  # WEEKLY: Play times are reset each week.
+  # MONTHLY: Play times are reset each month.
+  # COMMAND: Play times can be only reset by command.
+  mode: DAILY
+
+  # Timezone of the server.
+  # All timezones: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  timezone: America/Santiago
+
+  # Specific hour of the day when play times will be reset.
+  # Use the format "HH:MM".
+  hour: "00:00"
+
+# World whitelist system option that allows you to set the time limit only
+# in certain worlds instead of the entire server.
+world_whitelist_system:
+  # Whether this system should be enabled or not.
+  enabled: false
+
+  # Worlds in which players will have the same time limit.
+  worlds:
+  - world
+  - world_nether
+  - world_the_end
+
+  # Since the time limit works only in certain worlds, the player will not
+  # be kicked from the server when its time runs out. Instead of that, they
+  # will be teleported to another world. Here you must specify the specific
+  # coordinates where you want the player to be teleported. Be sure not
+  # to set a whitelisted world.
+  # Format: world;x;y;z;yaw;pitch
+  teleport_coordinates_on_kick: spawn;0;60;0;90;0
+
+# If this option is enabled, the information message will show up to
+# all players joining the server. If they want to hide it, they will
+# need to use the /ptl message command
+information_message_enabled_by_default: true
+
+# This option defines the time (in seconds) to automatically save
+# player data.
+player_data_save: 300
+
+# Whether the time limit information message should appear in the
+# action bar.
+action_bar: false
+
+# Whether the time limit information message should appear in the
+# boss bar. Only works in 1.9+.
+boss_bar:
+  # If the boss bar should be enabled or not.
+  enabled: true
+
+  # Color of the boss bar. Use colors from the following link:
+  # https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarColor.html
+  color: RED
+
+  # Style of the boss bar. Use styles from the following link:
+  # https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarStyle.html
+  style: SEGMENTED_10
+
+# Defines if every message/text in the plugin should use the MiniMessage format.
+# Only works on Paper 1.19.4+.
+use_minimessage: false
+
+# This allows you to set notification actions when a player reaches
+# a certain remaining play time.
+notifications:
+  60:
+    - "playsound: BLOCK_NOTE_BLOCK_PLING;10;0.1"
+    - "centered_message: "
+    - "centered_message: &c&lWARNING!"
+    - "centered_message: &cYou have &71 minute &cleft to play on the server."
+    - "centered_message: "
+  30:
+    - "playsound: BLOCK_NOTE_BLOCK_PLING;10;0.1"
+    - "centered_message: "
+    - "centered_message: &c&lWARNING!"
+    - "centered_message: &cYou have &730 seconds &cleft to play on the server."
+    - "centered_message: "

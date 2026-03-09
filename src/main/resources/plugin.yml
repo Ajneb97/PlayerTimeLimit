@@ -1,0 +1,23 @@
+main: ptl.ajneb97.PlayerTimeLimit
+version: ${project.version}
+name: PlayerTimeLimit
+api-version: 1.13
+author: Ajneb97
+softdepend: [Multiverse-Core,PlaceholderAPI]
+
+commands:
+  playertimelimit:
+    description: Main command of PlayerTimeLimit
+    aliases: [ptl]
+
+permissions:
+  playertimelimit.commands.message:
+    default: true
+  playertimelimit.commands.check:
+    default: true
+  playertimelimit.commands.check.others:
+    default: op
+  playertimelimit.commands.info:
+    default: true
+  playertimelimit.admin:
+    default: op
