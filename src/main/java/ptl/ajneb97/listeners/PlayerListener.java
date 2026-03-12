@@ -30,7 +30,7 @@ public class PlayerListener implements Listener{
 		if(player.isOp() && !(plugin.version.equals(latestVersion)) &&
 				plugin.getConfigsManager().getMainConfigManager().isUpdateNotification()){
 			player.sendMessage(MessagesManager.getLegacyColoredMessage(plugin.prefix+" &cThere is a new version available. &e(&7"+latestVersion+"&e)"));
-			player.sendMessage(MessagesManager.getLegacyColoredMessage("&cYou can download it at: &ahttps://www.spigotmc.org/resources/96577/"));
+			player.sendMessage(MessagesManager.getLegacyColoredMessage("&cYou can download it at: &ahttps://modrinth.com/plugin/player-time-limit"));
 		}
 	}
 	

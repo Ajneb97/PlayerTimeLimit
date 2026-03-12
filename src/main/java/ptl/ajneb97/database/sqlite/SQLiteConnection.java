@@ -37,10 +37,10 @@ public class SQLiteConnection {
 
             createTables();
 
-            Bukkit.getConsoleSender().sendMessage(MessagesManager.getLegacyColoredMessage(plugin.prefix+"&aSuccessfully connected to the Database."));
+            Bukkit.getConsoleSender().sendMessage(MessagesManager.getLegacyColoredMessage(plugin.prefix+"&aSuccessfully connected to the SQLite Database."));
 
         } catch (SQLException e) {
-            Bukkit.getConsoleSender().sendMessage(MessagesManager.getLegacyColoredMessage(plugin.prefix+"&cError while connecting to the Database."));
+            Bukkit.getConsoleSender().sendMessage(MessagesManager.getLegacyColoredMessage(plugin.prefix+"&cError while connecting to the SQLite Database."));
             e.printStackTrace();
         }
     }

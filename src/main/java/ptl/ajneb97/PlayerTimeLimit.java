@@ -14,6 +14,7 @@ import ptl.ajneb97.database.DatabaseManager;
 import ptl.ajneb97.listeners.PlayerListener;
 import ptl.ajneb97.managers.*;
 import ptl.ajneb97.managers.dependencies.DependencyManager;
+import ptl.ajneb97.managers.dependencies.Metrics;
 import ptl.ajneb97.model.internal.UpdateCheckerResult;
 import ptl.ajneb97.tasks.*;
 import ptl.ajneb97.utils.ServerVersion;
@@ -74,6 +75,7 @@ public class PlayerTimeLimit extends JavaPlugin {
 		if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
 			   new ExpansionPlayerTimeLimit(this).register();
 		}
+		Metrics metrics = new Metrics(this,30074);
 
 		Bukkit.getConsoleSender().sendMessage(prefix+MessagesManager.getLegacyColoredMessage("&eHas been enabled! &fVersion: "+version));
 		Bukkit.getConsoleSender().sendMessage(prefix+MessagesManager.getLegacyColoredMessage("&eThanks for using my plugin!   &f~Ajneb97"));
@@ -172,7 +174,7 @@ public class PlayerTimeLimit extends JavaPlugin {
 			String latestVersion = result.getLatestVersion();
 			if(latestVersion != null){
 				Bukkit.getConsoleSender().sendMessage(MessagesManager.getLegacyColoredMessage("&cThere is a new version available. &e(&7"+latestVersion+"&e)"));
-				Bukkit.getConsoleSender().sendMessage(MessagesManager.getLegacyColoredMessage("&cYou can download it at: &fhttps://www.spigotmc.org/resources/96577/"));
+				Bukkit.getConsoleSender().sendMessage(MessagesManager.getLegacyColoredMessage("&cYou can download it at: &fhttps://modrinth.com/plugin/player-time-limit"));
 			}
 		}else{
 			Bukkit.getConsoleSender().sendMessage(MessagesManager.getLegacyColoredMessage(prefix+" &cError while checking update."));
