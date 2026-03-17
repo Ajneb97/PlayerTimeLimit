@@ -19,9 +19,10 @@ public class MiniMessageUtils {
         }
     }
 
-    public static void title(Player player, String title, String subtitle){
+    public static void title(Player player, String title, String subtitle, Integer fadeIn, Integer stay, Integer fadeOut){
         player.showTitle(Title.title(
-                MiniMessage.miniMessage().deserialize(title),MiniMessage.miniMessage().deserialize(subtitle)
+                MiniMessage.miniMessage().deserialize(title),MiniMessage.miniMessage().deserialize(subtitle),
+                fadeIn,stay,fadeOut
         ));
     }
 
