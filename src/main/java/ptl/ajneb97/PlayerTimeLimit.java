@@ -17,6 +17,7 @@ import ptl.ajneb97.managers.dependencies.DependencyManager;
 import ptl.ajneb97.managers.dependencies.Metrics;
 import ptl.ajneb97.model.internal.UpdateCheckerResult;
 import ptl.ajneb97.tasks.*;
+import ptl.ajneb97.integrations.AuthMeSupport;
 import ptl.ajneb97.utils.ServerVersion;
 
 
@@ -34,6 +35,7 @@ public class PlayerTimeLimit extends JavaPlugin {
 	private DependencyManager dependencyManager;
 	private TimeResetManager timeResetManager;
 	private DatabaseManager databaseManager;
+	private AuthMeSupport authMeSupport;
 	
 	private PlayerDataSaveTask playerDataSaveTask;
 	private PlayerTimeTask playerTimeTask;
@@ -55,6 +57,8 @@ public class PlayerTimeLimit extends JavaPlugin {
 
 		registerEvents();
 		registerCommands();
+		this.authMeSupport = new AuthMeSupport(this);
+		this.authMeSupport.registerAuthEvents();
 
 		playerTimeTask = new PlayerTimeTask(this);
 		playerTimeTask.start();
@@ -185,5 +189,9 @@ public class PlayerTimeLimit extends JavaPlugin {
 
 	public UpdateCheckerManager getUpdateCheckerManager() {
 		return updateCheckerManager;
+	}
+
+	public AuthMeSupport getAuthMeSupport() {
+		return authMeSupport;
 	}
 }

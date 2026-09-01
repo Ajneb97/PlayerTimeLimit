@@ -3,7 +3,7 @@ version: ${project.version}
 name: PlayerTimeLimit
 api-version: 1.13
 author: Ajneb97
-softdepend: [Multiverse-Core,PlaceholderAPI]
+softdepend: [Multiverse-Core,PlaceholderAPI,AuthMe]
 
 commands:
   playertimelimit:

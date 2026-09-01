@@ -126,7 +126,9 @@ public class PlayerDataManager {
         if(playerData == null){
             createPlayer(player);
         }
-        updateTimeLimit(player);
+        if(isReadyForTimeTracking(player)) {
+            updateTimeLimit(player);
+        }
     }
 
     public void manageLeave(Player player){
@@ -172,6 +174,13 @@ public class PlayerDataManager {
         if(!playerData.getTimeLimit().equals(timeLimitName)){
             playerData.setTimeLimit(timeLimitName);
         }
+    }
+
+    public boolean isReadyForTimeTracking(Player player) {
+        if (player == null || !player.isOnline()) {
+            return false;
+        }
+        return plugin.getAuthMeSupport() == null || plugin.getAuthMeSupport().isReadyForTimeTracking(player);
     }
 
     public int getTimeLimit(UUID uuid) {
