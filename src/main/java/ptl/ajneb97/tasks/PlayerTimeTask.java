@@ -27,8 +27,11 @@ public class PlayerTimeTask {
 	public void execute() {
 		MainConfigManager mainConfigManager = plugin.getConfigsManager().getMainConfigManager();
 		PlayerTimeManager playerTimeManager = plugin.getPlayerTimeManager();
+		var playerDataManager = plugin.getPlayerDataManager();
 		for(Player player : Bukkit.getOnlinePlayers()){
-			playerTimeManager.updateTimePlayer(player,mainConfigManager);
+			if(playerDataManager.isReadyForTimeTracking(player)) {
+				playerTimeManager.updateTimePlayer(player,mainConfigManager);
+			}
 		}
 	}
 

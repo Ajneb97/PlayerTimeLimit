@@ -20,13 +20,15 @@ public class PlayerUpdateLimitTask {
                 execute();
             }
 
-        }.runTaskTimerAsynchronously(plugin, 0L, 60L);
+        }.runTaskTimer(plugin, 0L, 60L);
     }
 
     public void execute() {
         PlayerDataManager playerDataManager = plugin.getPlayerDataManager();
         for(Player player : Bukkit.getOnlinePlayers()){
-            playerDataManager.updateTimeLimit(player);
+            if(playerDataManager.isReadyForTimeTracking(player)) {
+                playerDataManager.updateTimeLimit(player);
+            }
         }
     }
 }
