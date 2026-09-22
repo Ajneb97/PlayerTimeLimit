@@ -108,11 +108,12 @@ public class PlayerTimeLimit extends JavaPlugin {
             case "1.21.11" -> serverVersion = ServerVersion.v1_21_R7;
 			case "26.1","26.1.1","26.1.2" -> serverVersion = ServerVersion.v26_1;
 			case "26.2" -> serverVersion = ServerVersion.v26_2;
+			case "26.3" -> serverVersion = ServerVersion.v26_3;
             default -> {
                 try {
                     serverVersion = ServerVersion.valueOf(packageName.replace("org.bukkit.craftbukkit.", ""));
                 } catch (Exception e) {
-                    serverVersion = ServerVersion.v26_2;
+                    serverVersion = ServerVersion.v26_3;
                 }
             }
         }
