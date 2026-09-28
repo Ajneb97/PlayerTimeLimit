@@ -163,7 +163,7 @@ public class PlayerDataManager {
 
             int time = entry.getValue();
             String permission = "playertimelimit.limit."+key;
-            if(player.hasPermission(permission) && time > timeLimitAmount){
+            if(player.hasPermission(permission) && isHigherLimit(time,timeLimitAmount)){
                 timeLimitAmount = time;
                 timeLimitName = entry.getKey();
             }
@@ -172,6 +172,16 @@ public class PlayerDataManager {
         if(!playerData.getTimeLimit().equals(timeLimitName)){
             playerData.setTimeLimit(timeLimitName);
         }
+    }
+
+    private static boolean isHigherLimit(int limit, int currentLimit){
+        if(limit == 0){
+            return currentLimit != 0;
+        }
+        if(currentLimit == 0){
+            return false;
+        }
+        return limit > currentLimit;
     }
 
     public int getTimeLimit(UUID uuid) {
